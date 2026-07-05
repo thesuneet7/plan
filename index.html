@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Automation GTM — Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f5;
+    --surface: #ffffff;
+    --border: #e4e4e7;
+    --border-light: #f0f0f2;
+    --text-1: #18181b;
+    --text-2: #52525b;
+    --text-3: #a1a1aa;
+    --accent: #2563eb;
+    --accent-bg: #eff6ff;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --red: #dc2626;
+    --success-dot: #22c55e;
+    --info-dot: #60a5fa;
+    --neutral-dot: #d4d4d8;
+    --font: 'Inter', system-ui, sans-serif;
+  }
+
+  html { font-size: 15px; }
+  body { background: var(--bg); color: var(--text-1); font-family: var(--font); line-height: 1.6; }
+
+  /* layout */
+  .page { max-width: 1060px; margin: 0 auto; padding: 40px 24px 80px; }
+  .stack { display: flex; flex-direction: column; }
+  .stack-4 { gap: 4px; }
+  .stack-6 { gap: 6px; }
+  .stack-8 { gap: 8px; }
+  .stack-12 { gap: 12px; }
+  .stack-16 { gap: 16px; }
+  .stack-20 { gap: 20px; }
+  .stack-24 { gap: 24px; }
+  .row { display: flex; flex-direction: row; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .spacer { flex: 1; }
+
+  /* typography */
+  h1 { font-size: 1.6rem; font-weight: 700; color: var(--text-1); line-height: 1.2; }
+  h2 { font-size: 1.05rem; font-weight: 600; color: var(--text-1); }
+  h3 { font-size: 0.875rem; font-weight: 600; color: var(--text-1); }
+  .text-sm { font-size: 0.8125rem; }
+  .text-xs { font-size: 0.75rem; }
+  .text-secondary { color: var(--text-2); }
+  .text-tertiary { color: var(--text-3); }
+  .text-semibold { font-weight: 600; }
+  .text-mono { font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
+  .subtitle { font-size: 0.9rem; color: var(--text-2); margin-top: 4px; }
+
+  /* divider */
+  hr { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* pills */
+  .pill {
+    display: inline-flex; align-items: center; height: 30px; padding: 0 12px;
+    border-radius: 999px; font-size: 0.8125rem; font-weight: 500; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text-2);
+    transition: all 0.12s; user-select: none; white-space: nowrap;
+  }
+  .pill:hover { border-color: #c4c4cc; color: var(--text-1); }
+  .pill.active { background: var(--text-1); color: #fff; border-color: var(--text-1); }
+  .pill.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pill-sm { height: 22px; padding: 0 8px; font-size: 0.7rem; }
+  .pill-green { background: var(--green-bg); color: var(--green); border-color: #86efac; }
+  .pill-amber { background: var(--amber-bg); color: var(--amber); border-color: #fcd34d; }
+
+  /* stat */
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .stat-value { font-size: 1.35rem; font-weight: 700; color: var(--text-1); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: var(--text-3); margin-top: 4px; font-weight: 500; letter-spacing: 0.01em; }
+
+  /* callout */
+  .callout {
+    border-radius: 8px; padding: 12px 16px; border-left: 3px solid;
+    font-size: 0.8375rem;
+  }
+  .callout-info { background: var(--accent-bg); border-color: var(--accent); color: #1e40af; }
+  .callout-warning { background: var(--amber-bg); border-color: var(--amber); color: #92400e; }
+  .callout-success { background: var(--green-bg); border-color: var(--green); color: #14532d; }
+  .callout-title { font-weight: 600; margin-bottom: 2px; }
+
+  /* cards */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .card-header {
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+    font-size: 0.8125rem; font-weight: 600; color: var(--text-2);
+    background: var(--bg); display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-body { padding: 14px; font-size: 0.8375rem; color: var(--text-2); line-height: 1.6; }
+
+  /* tables */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; background: var(--surface); }
+  thead th {
+    padding: 9px 12px; text-align: left; font-weight: 600; font-size: 0.75rem;
+    color: var(--text-3); background: var(--bg); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; white-space: nowrap; letter-spacing: 0.02em;
+  }
+  tbody tr:nth-child(even) { background: #fafafa; }
+  tbody tr:hover { background: #f4f4f6; }
+  tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  .td-lead { display: flex; align-items: center; gap: 8px; }
+  .row-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .dot-success { background: var(--success-dot); }
+  .dot-info { background: var(--info-dot); }
+  .dot-neutral { background: var(--neutral-dot); }
+
+  /* score bar */
+  .score-bar { display: flex; gap: 3px; align-items: center; }
+  .score-pip { width: 7px; height: 7px; border-radius: 2px; background: var(--border); }
+  .score-pip.filled { background: var(--accent); }
+  .score-label { font-size: 0.7rem; color: var(--text-3); margin-left: 4px; }
+
+  /* tabs */
+  .tab-nav { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: flex; flex-direction: column; gap: 20px; }
+
+  /* accordion */
+  .accordion { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .accordion-item + .accordion-item { border-top: 1px solid var(--border); }
+  .accordion-header {
+    padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+    background: var(--surface); transition: background 0.1s; user-select: none;
+  }
+  .accordion-header:hover { background: var(--bg); }
+  .accordion-chevron {
+    width: 16px; height: 16px; flex-shrink: 0; color: var(--text-3);
+    transition: transform 0.18s; display: flex; align-items: center; justify-content: center;
+  }
+  .accordion-item.open .accordion-chevron { transform: rotate(90deg); }
+  .accordion-title { font-size: 0.85rem; font-weight: 600; color: var(--text-1); }
+  .accordion-sub { font-size: 0.75rem; color: var(--text-3); margin-left: auto; white-space: nowrap; }
+  .accordion-body { display: none; padding: 16px; background: var(--bg); }
+  .accordion-item.open .accordion-body { display: block; }
+  .code-block {
+    background: #1e1e2e; border-radius: 8px; padding: 16px;
+    font-family: 'Menlo','Monaco','Courier New',monospace; font-size: 0.775rem;
+    color: #cdd6f4; line-height: 1.7; white-space: pre-wrap; word-break: break-word;
+    overflow-x: auto;
+  }
+
+  /* detail card */
+  .detail-card { display: none; }
+  .detail-card.visible { display: block; }
+
+  /* top tabs pill override */
+  .tab-nav .pill { font-size: 0.875rem; height: 34px; padding: 0 16px; }
+
+  /* filters row */
+  .filter-row { display: flex; gap: 6px; }
+  .filter-pill {
+    display: inline-flex; align-items: center; height: 24px; padding: 0 10px;
+    border-radius: 999px; font-size: 0.75rem; font-weight: 500; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text-2);
+    transition: all 0.1s; user-select: none;
+  }
+  .filter-pill.active { background: var(--text-1); color: #fff; border-color: var(--text-1); }
+
+  /* hidden row (for filter) */
+  .wf-row { transition: none; }
+  .wf-row.hidden { display: none; }
+
+  @media (max-width: 720px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    h1 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page stack stack-24">
+
+  <!-- HEADER -->
+  <div class="stack stack-4">
+    <h1>Workflow Automation GTM — Bangalore</h1>
+    <p class="subtitle">Target companies where tech is not the core business &middot; Find 5–6 yr old workflows &middot; Automate + maintain</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-nav" id="tabNav">
+    <button class="pill active" onclick="switchTab('industries')">Industries</button>
+    <button class="pill" onclick="switchTab('workflows')">Workflows</button>
+    <button class="pill" onclick="switchTab('outreach')">Outreach Scripts</button>
+    <button class="pill" onclick="switchTab('setup')">Venture Setup</button>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════ INDUSTRIES TAB ═══════════════════ -->
+  <div class="tab-pane active" id="tab-industries">
+
+    <div class="grid-4">
+      <div class="stat"><div class="stat-value">8</div><div class="stat-label">Target industries</div></div>
+      <div class="stat"><div class="stat-value">₹20–300 Cr</div><div class="stat-label">Sweet spot revenue</div></div>
+      <div class="stat"><div class="stat-value">50–400</div><div class="stat-label">Headcount range</div></div>
+      <div class="stat"><div class="stat-value">8+ yrs</div><div class="stat-label">Min company age</div></div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Tier 1 — Approach First</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Industry</th><th>Fit Score</th><th>Revenue Band</th><th>BLR Zones</th><th>Avg Contract</th><th>Decision Maker</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-success"></span><span class="text-semibold">Real Estate Developers</span></div></td>
+              <td><div class="score-bar" data-score="92"></div></td>
+              <td class="text-secondary text-sm">₹50–300 Cr</td>
+              <td class="text-secondary text-sm">Whitefield, Sarjapur, Hebbal</td>
+              <td class="text-sm text-semibold">₹6–15L + ₹50K/mo</td>
+              <td class="text-secondary text-sm">MD, COO, VP Projects</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-success"></span><span class="text-semibold">Manufacturing (Light/FMCG)</span></div></td>
+              <td><div class="score-bar" data-score="88"></div></td>
+              <td class="text-secondary text-sm">₹20–200 Cr</td>
+              <td class="text-secondary text-sm">Peenya, Electronic City, Bommasandra</td>
+              <td class="text-sm text-semibold">₹3–10L + ₹35K/mo</td>
+              <td class="text-secondary text-sm">MD/Owner, GM, Ops Manager</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-success"></span><span class="text-semibold">Healthcare Chains (5–30 clinics)</span></div></td>
+              <td><div class="score-bar" data-score="85"></div></td>
+              <td class="text-secondary text-sm">₹15–150 Cr</td>
+              <td class="text-secondary text-sm">Pan-BLR (HSR, Koramangala, Whitefield)</td>
+              <td class="text-sm text-semibold">₹5–12L + ₹40K/mo</td>
+              <td class="text-secondary text-sm">CEO/MD, CFO, Head of Ops</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-success"></span><span class="text-semibold">Logistics / Last-Mile / Freight</span></div></td>
+              <td><div class="score-bar" data-score="83"></div></td>
+              <td class="text-secondary text-sm">₹20–150 Cr</td>
+              <td class="text-secondary text-sm">Peenya, Whitefield, Electronic City</td>
+              <td class="text-sm text-semibold">₹4–10L + ₹40K/mo</td>
+              <td class="text-secondary text-sm">Founder, COO</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-success"></span><span class="text-semibold">Education Chains (K-12, Coaching)</span></div></td>
+              <td><div class="score-bar" data-score="76"></div></td>
+              <td class="text-secondary text-sm">₹10–100 Cr</td>
+              <td class="text-secondary text-sm">Jayanagar, Rajajinagar, Malleswaram</td>
+              <td class="text-sm text-semibold">₹2–6L + ₹25K/mo</td>
+              <td class="text-secondary text-sm">Founder/Owner, Principal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Tier 2 — After First 2–3 Clients</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Industry</th><th>Fit Score</th><th>Revenue Band</th><th>Avg Contract</th><th>Entry Channels</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-info"></span><span class="text-semibold">Pharma Distributors</span></div></td>
+              <td><div class="score-bar" data-score="68"></div></td>
+              <td class="text-secondary text-sm">₹20–100 Cr</td>
+              <td class="text-sm">₹3–7L + ₹35K/mo</td>
+              <td class="text-secondary text-sm">LinkedIn, CA referrals, IndiaMart</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-info"></span><span class="text-semibold">FMCG Distributors</span></div></td>
+              <td><div class="score-bar" data-score="65"></div></td>
+              <td class="text-secondary text-sm">₹15–80 Cr</td>
+              <td class="text-sm">₹3–6L + ₹30K/mo</td>
+              <td class="text-secondary text-sm">LinkedIn, BNI, IndiaMart</td>
+            </tr>
+            <tr>
+              <td><div class="td-lead"><span class="row-dot dot-info"></span><span class="text-semibold">Multi-location Car Dealerships</span></div></td>
+              <td><div class="score-bar" data-score="62"></div></td>
+              <td class="text-secondary text-sm">₹50–200 Cr</td>
+              <td class="text-sm">₹4–8L + ₹40K/mo</td>
+              <td class="text-secondary text-sm">LinkedIn, walk-in, referrals</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Industry detail section -->
+    <div class="stack stack-8">
+      <h2>Industry Detail</h2>
+      <div class="row" id="industryPills">
+        <button class="pill pill-sm" onclick="showIndustry('real-estate')">Real Estate Developers</button>
+        <button class="pill pill-sm" onclick="showIndustry('manufacturing')">Manufacturing</button>
+        <button class="pill pill-sm" onclick="showIndustry('healthcare')">Healthcare Chains</button>
+        <button class="pill pill-sm" onclick="showIndustry('logistics')">Logistics</button>
+        <button class="pill pill-sm" onclick="showIndustry('education')">Education Chains</button>
+        <button class="pill pill-sm" onclick="showIndustry('pharma')">Pharma Distributors</button>
+        <button class="pill pill-sm" onclick="showIndustry('fmcg')">FMCG Distributors</button>
+        <button class="pill pill-sm" onclick="showIndustry('auto')">Car Dealerships</button>
+      </div>
+
+      <div class="detail-card" id="detail-real-estate">
+        <div class="card">
+          <div class="card-header">Real Estate Developers <span class="pill pill-sm accent">Tier 1</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Site progress tracking, vendor payments, customer pipeline — all on WhatsApp+Excel. No live project dashboard. Reports take a day to compile.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>MD, COO, VP Projects, Finance Head</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>CREDAI Bangalore, LinkedIn, BNI Bangalore chapters</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Whitefield, Sarjapur Rd, Hebbal, Yelahanka, Devanahalli corridor</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹50–300 Cr (not Prestige/Brigade/Sobha — they have their own tech)</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹6–15L + ₹50–1L/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-manufacturing">
+        <div class="card">
+          <div class="card-header">Manufacturing (Light/FMCG) <span class="pill pill-sm accent">Tier 1</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Inventory reconciliation done manually every Friday. Production scheduling on Excel. QC reports typed up by hand. Vendor POs via email chains.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>MD/Owner (often family-run), General Manager, Operations Head</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>CII Karnataka, Peenya Industrial Association, cold walk-ins</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Peenya Industrial Area, Electronic City Phase 2, Bommasandra, Jigani</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹20–200 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹3–10L + ₹30–75K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-healthcare">
+        <div class="card">
+          <div class="card-header">Healthcare Chains (5–30 clinics) <span class="pill pill-sm accent">Tier 1</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Head office has no live view across locations. Billing reconciliation, pharmacy inventory, staff scheduling — all manual. Monthly MIS takes 3 days.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>CEO/MD, CFO, Head of Operations, Medical Director</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>IIM-B NSRCEL healthcare network, LinkedIn, Practo (find chains)</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Pan-BLR — Koramangala, HSR Layout, Jayanagar, Whitefield, Marathahalli</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹15–150 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹5–12L + ₹40–75K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-logistics">
+        <div class="card">
+          <div class="card-header">Logistics / Last-Mile / Freight <span class="pill pill-sm accent">Tier 1</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Delivery updates via WhatsApp, billing re-entered manually from chat, route planning done on instinct. Driver attendance tracked on paper.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>Founder, COO (usually lean — go straight to the top)</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>LinkedIn, CII, cold email, CA referrals (they work with multiple logistics clients)</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Peenya, Whitefield (near tech parks), Electronic City, Tumkur Road</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹20–150 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹4–10L + ₹40–80K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-education">
+        <div class="card">
+          <div class="card-header">Education Chains (K-12, Coaching) <span class="pill pill-sm accent">Tier 1</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Fee collection tracked in a spreadsheet only the accountant reads. Attendance in a register, result analysis done per teacher manually. No central dashboard.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>Founder/Owner (most are owner-operated), Admin Head, Principal</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>LinkedIn, TiE Bangalore, walk-ins in Jayanagar/Rajajinagar</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Jayanagar, Rajajinagar, Malleswaram, Indiranagar, Whitefield</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹10–100 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹2–6L + ₹25–50K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-pharma">
+        <div class="card">
+          <div class="card-header">Pharma Distributors <span class="pill pill-sm">Tier 2</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Order processing from stockists manual, expiry tracking on Excel, billing to retailers by hand. High SKU count means inventory errors are constant.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>MD/Owner, Operations Head</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>LinkedIn, CA referrals, IndiaMart</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Rajajinagar, Peenya</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹20–100 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹3–7L + ₹35K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-fmcg">
+        <div class="card">
+          <div class="card-header">FMCG Distributors <span class="pill pill-sm">Tier 2</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Beat plan / route-to-market tracking on Excel. Collections from retailers tracked manually. No live view of who's overdue.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>Owner/MD, Sales Head</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>LinkedIn, BNI, IndiaMart</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Pan-BLR</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹15–80 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹3–6L + ₹30K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card" id="detail-auto">
+        <div class="card">
+          <div class="card-header">Multi-location Car Dealerships <span class="pill pill-sm">Tier 2</span></div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">PRIMARY PAIN</div><div>Service scheduling by phone/register, parts inventory across locations manual, no unified customer follow-up post service/sale.</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">DECISION MAKER</div><div>MD, General Manager, Operations Head</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">ENTRY CHANNELS</div><div>LinkedIn, walk-in at showroom, referrals</div></div>
+              </div>
+              <div class="stack stack-12">
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">BLR ZONES</div><div>Whitefield, Outer Ring Road, Marathahalli</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">REVENUE BAND</div><div>₹50–200 Cr</div></div>
+                <div class="stack stack-4"><div class="text-xs text-tertiary text-semibold" style="letter-spacing:.05em">AVG CONTRACT</div><div class="text-semibold" style="font-size:1rem;">₹4–8L + ₹40K/month</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-industries -->
+
+  <!-- ═══════════════════ WORKFLOWS TAB ═══════════════════ -->
+  <div class="tab-pane" id="tab-workflows">
+
+    <div class="grid-4">
+      <div class="stat"><div class="stat-value">7</div><div class="stat-label">Workflow types</div></div>
+      <div class="stat"><div class="stat-value">2–8 wks</div><div class="stat-label">Typical build time</div></div>
+      <div class="stat"><div class="stat-value">₹2–12L</div><div class="stat-label">One-time range</div></div>
+      <div class="stat"><div class="stat-value">₹20K–1L</div><div class="stat-label">Monthly tail/client</div></div>
+    </div>
+
+    <div class="stack stack-8">
+      <div class="row">
+        <h2>Workflow Opportunities</h2>
+        <span class="spacer"></span>
+        <div class="filter-row" id="wfFilter">
+          <button class="filter-pill active" onclick="filterWf('all',this)">All</button>
+          <button class="filter-pill" onclick="filterWf('Fastest',this)">Fastest</button>
+          <button class="filter-pill" onclick="filterWf('Fast',this)">Fast</button>
+          <button class="filter-pill" onclick="filterWf('Medium',this)">Medium</button>
+          <button class="filter-pill" onclick="filterWf('Slow',this)">Slow</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Workflow</th><th>Velocity</th><th>Build</th><th>One-Time</th><th>Monthly</th><th>Client ROI</th>
+          </tr></thead>
+          <tbody>
+            <tr class="wf-row" data-velocity="Fastest">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">MIS / Reporting Automation</div><div class="text-xs text-tertiary">Pain is visible every month-end. ROI is immediate.</div></div></td>
+              <td><span class="pill pill-sm pill-green">Fastest</span></td>
+              <td class="text-sm">2–3 wks</td>
+              <td class="text-sm text-semibold">₹2–4L</td>
+              <td class="text-sm">₹20–35K</td>
+              <td class="text-xs text-secondary">Eliminates 30–60 hrs/month of analyst time</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Fast">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">Invoice / Billing Reconciliation</div><div class="text-xs text-tertiary">Finance team hates it. CFO controls budget. Easy sell.</div></div></td>
+              <td><span class="pill pill-sm pill-green">Fast</span></td>
+              <td class="text-sm">3–4 wks</td>
+              <td class="text-sm text-semibold">₹3–6L</td>
+              <td class="text-sm">₹25–40K</td>
+              <td class="text-xs text-secondary">Cuts reconciliation from 2 days to 2 hours</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Fast">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">Sales / Lead Pipeline (Simple CRM)</div><div class="text-xs text-tertiary">Sales team is vocal. Revenue impact is visible.</div></div></td>
+              <td><span class="pill pill-sm pill-green">Fast</span></td>
+              <td class="text-sm">3–5 wks</td>
+              <td class="text-sm text-semibold">₹3–6L</td>
+              <td class="text-sm">₹30–50K</td>
+              <td class="text-xs text-secondary">Reduces lead drop-off, adds follow-up visibility</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Medium">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">Inventory Management</div><div class="text-xs text-tertiary">Stockouts cost real money. Easy ROI math.</div></div></td>
+              <td><span class="pill pill-sm">Medium</span></td>
+              <td class="text-sm">4–6 wks</td>
+              <td class="text-sm text-semibold">₹4–8L</td>
+              <td class="text-sm">₹35–60K</td>
+              <td class="text-xs text-secondary">Reduces stockouts 60–80%, saves 40 hrs/month</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Medium">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">Vendor / Procurement Workflow</div><div class="text-xs text-tertiary">Finance + ops both feel the pain. Two champions.</div></div></td>
+              <td><span class="pill pill-sm">Medium</span></td>
+              <td class="text-sm">4–6 wks</td>
+              <td class="text-sm text-semibold">₹4–8L</td>
+              <td class="text-sm">₹35–65K</td>
+              <td class="text-xs text-secondary">Cuts PO cycle from 5 days to 1 day</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Medium">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">Logistics / Delivery Tracking</div><div class="text-xs text-tertiary">High impact, client-facing. Easy to demonstrate.</div></div></td>
+              <td><span class="pill pill-sm">Medium</span></td>
+              <td class="text-sm">5–8 wks</td>
+              <td class="text-sm text-semibold">₹5–12L</td>
+              <td class="text-sm">₹50K–1L</td>
+              <td class="text-xs text-secondary">Eliminates manual data entry, improves billing speed</td>
+            </tr>
+            <tr class="wf-row" data-velocity="Slow">
+              <td><div class="stack stack-4"><div class="text-semibold text-sm">HR Onboarding Portal</div><div class="text-xs text-tertiary">Low urgency but easy add-on to existing engagement.</div></div></td>
+              <td><span class="pill pill-sm">Slow</span></td>
+              <td class="text-sm">3–4 wks</td>
+              <td class="text-sm text-semibold">₹2–4L</td>
+              <td class="text-sm">₹20–30K</td>
+              <td class="text-xs text-secondary">Cuts onboarding admin from 2 days to 2 hrs/hire</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Tech Stack by Workflow</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Workflow</th><th>Stack</th></tr></thead>
+          <tbody>
+            <tr><td class="text-sm text-semibold">MIS / Reporting Automation</td><td class="text-sm text-secondary">Python + FastAPI + React / Metabase</td></tr>
+            <tr><td class="text-sm text-semibold">Invoice / Billing Reconciliation</td><td class="text-sm text-secondary">Python data pipeline + simple web UI</td></tr>
+            <tr><td class="text-sm text-semibold">Sales / Lead Pipeline (CRM)</td><td class="text-sm text-secondary">React + FastAPI + Postgres</td></tr>
+            <tr><td class="text-sm text-semibold">Inventory Management</td><td class="text-sm text-secondary">React + FastAPI + Postgres</td></tr>
+            <tr><td class="text-sm text-semibold">Vendor / Procurement Workflow</td><td class="text-sm text-secondary">React + FastAPI + email integration</td></tr>
+            <tr><td class="text-sm text-semibold">Logistics / Delivery Tracking</td><td class="text-sm text-secondary">React Native PWA + FastAPI + WebSockets</td></tr>
+            <tr><td class="text-sm text-semibold">HR Onboarding Portal</td><td class="text-sm text-secondary">React + FastAPI + document upload</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Pricing Philosophy</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header">Starter — Single Workflow</div>
+          <div class="card-body">
+            <div class="stat-value" style="font-size:1.25rem">₹1.5–4L</div>
+            <div class="text-xs text-tertiary" style="margin-top:4px">+ ₹15–25K/month maintenance</div>
+            <div class="text-sm text-secondary" style="margin-top:10px">Pilot engagement. De-risks the relationship. Almost always expands.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Core — 2–3 Workflows</div>
+          <div class="card-body">
+            <div class="stat-value" style="font-size:1.25rem">₹4–10L</div>
+            <div class="text-xs text-tertiary" style="margin-top:4px">+ ₹30–75K/month</div>
+            <div class="text-sm text-secondary" style="margin-top:10px">The primary sell. Better unit economics for both sides.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Transform — Full Ops Stack</div>
+          <div class="card-body">
+            <div class="stat-value" style="font-size:1.25rem">₹12–25L</div>
+            <div class="text-xs text-tertiary" style="margin-top:4px">+ ₹75K–2L/month</div>
+            <div class="text-sm text-secondary" style="margin-top:10px">Full ops modernisation. Longer sales cycle. Come back here after 2 pilots.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-workflows -->
+
+  <!-- ═══════════════════ OUTREACH TAB ═══════════════════ -->
+  <div class="tab-pane" id="tab-outreach">
+
+    <div class="callout callout-info">
+      <div class="callout-title">The IIT Shortcut — Do This Before Any Cold Message</div>
+      Search LinkedIn for IIT alumni at every target company. If you find one, DM them first.
+      This converts to a warm intro to the decision maker 60–70% of the time and cuts your sales cycle from 3 weeks to 1 week.
+    </div>
+
+    <div class="stack stack-8">
+      <h2>Outreach Scripts</h2>
+      <div class="accordion">
+        <div class="accordion-item open">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-chevron"><svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><path d="M1 1l6 5-6 5"/></svg></div>
+            <div class="accordion-title">LinkedIn Connection Request</div>
+            <div class="accordion-sub">&lt; 300 chars</div>
+          </div>
+          <div class="accordion-body">
+            <div class="code-block">Hi [Name], IIT Kanpur + ex-BCG here, now in BLR building workflow automation for [industry] companies.
+Specifically working on [pain relevant to their industry — e.g. "Excel-based MIS reporting"].
+Would love to connect.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-chevron"><svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><path d="M1 1l6 5-6 5"/></svg></div>
+            <div class="accordion-title">LinkedIn DM — After Connection</div>
+            <div class="accordion-sub">Send 24–48 hrs after connecting</div>
+          </div>
+          <div class="accordion-body">
+            <div class="code-block">Hi [Name],
+
+Quick context: I'm Suneet, IIT Kanpur (Dept. Rank 1), ex-BCG Bengaluru.
+I'm building a workflow automation practice with a friend who's been running this at scale
+at a startup.
+
+In [industry], the specific pattern I keep seeing:
+[industry pain — 1 sentence. e.g. "Project coordinators manually updating 3 Excel sheets
+from WhatsApp photos. Site reports that take a day to compile for a weekly review."]
+
+We audit the workflow and automate 80% of it in 4–6 weeks.
+No disruption to your current systems — we work around them.
+
+Would a 20-minute call be worth your time?
+
+— Suneet | IIT Kanpur | ex-BCG</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-chevron"><svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><path d="M1 1l6 5-6 5"/></svg></div>
+            <div class="accordion-title">Cold Email</div>
+            <div class="accordion-sub">Subject: Automating [workflow] at [Company] — quick question</div>
+          </div>
+          <div class="accordion-body">
+            <div class="code-block">Hi [Name],
+
+I'm Suneet Maharana — IIT Kanpur, ex-BCG Bengaluru (built automation for a ₹1,300 Cr
+GTM program there).
+
+In [industry], the pattern I see most: [1-sentence pain].
+
+One example: a ₹150 Cr logistics company spent 4 hours daily re-entering delivery data
+from WhatsApp into billing software. We automated it in 3 weeks — their ops team now
+handles 3x the volume.
+
+I'd like to do a free workflow audit for [Company Name] — 45 minutes. You get a report
+with exactly what can be automated and what it's worth. No sales pressure.
+
+— Suneet | IIT Kanpur | ex-BCG | +91 XXXXX</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-chevron"><svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><path d="M1 1l6 5-6 5"/></svg></div>
+            <div class="accordion-title">Cold Call Script</div>
+            <div class="accordion-sub">Use after 3 days of no response</div>
+          </div>
+          <div class="accordion-body">
+            <div class="code-block">"Hi, is this [Name]?
+
+Yes — I'm Suneet Maharana from [Venture Name]. IIT Kanpur, ex-BCG. I'll be quick.
+
+I work with [industry] companies to modernize old manual processes — the Excel sheets and
+WhatsApp chains that ops teams have lived with for years.
+
+Quick question: at [Company Name], does your ops team compile reports manually, or manage
+orders/billing across multiple spreadsheets?
+
+[If yes or hesitation] — That's exactly the pattern I help fix. Would 20 minutes make
+sense? I'd come to your office.
+
+[If no] — Fair enough. If that ever changes, feel free to reach out."</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-chevron"><svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><path d="M1 1l6 5-6 5"/></svg></div>
+            <div class="accordion-title">Industry-Specific Pain Inserts</div>
+            <div class="accordion-sub">Paste into the [industry pain] slot</div>
+          </div>
+          <div class="accordion-body">
+            <div class="code-block">Real Estate:
+"Project coordinators manually updating 3 Excel sheets from WhatsApp photos and
+field calls. Site-level reports that take a day to compile for a weekly review."
+
+Manufacturing:
+"Inventory reconciliation done by one person every Friday — manually comparing stock
+entries across purchase orders, production slips, and the dispatch log."
+
+Healthcare Chains:
+"Head office has no live view of which location is hitting revenue targets until the
+3rd of next month, when someone finishes the MIS."
+
+Logistics:
+"Billing team re-entering shipment data that drivers already logged in WhatsApp.
+Errors, delays, and a 2-day lag on invoicing."
+
+Education:
+"Fee collection status tracked in a spreadsheet only the accountant can read.
+No one knows who's overdue until fees are actually missed."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Discovery Call Questions</h2>
+      <p class="text-secondary text-sm">Open with: <strong>"Tell me — where does your ops team waste the most time on something that shouldn't need a human?"</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Question</th><th>What you're probing for</th></tr></thead>
+          <tbody>
+            <tr><td class="text-tertiary text-xs">1</td><td class="text-sm">What are the 3 most time-consuming manual tasks your team does weekly?</td><td class="text-xs text-tertiary">The top 1–2 workflows to target</td></tr>
+            <tr><td class="text-tertiary text-xs">2</td><td class="text-sm">Are there reports that require multiple people to compile? How long?</td><td class="text-xs text-tertiary">How painful is it — time × people × frequency</td></tr>
+            <tr><td class="text-tertiary text-xs">3</td><td class="text-sm">What do you track in Excel that has grown "out of control"?</td><td class="text-xs text-tertiary">The specific Excel asset they're ashamed of</td></tr>
+            <tr><td class="text-tertiary text-xs">4</td><td class="text-sm">If I could give your team 10 hrs back per week — what would you automate first?</td><td class="text-xs text-tertiary">Their highest-priority = your Pilot scope</td></tr>
+            <tr><td class="text-tertiary text-xs">5</td><td class="text-sm">What happens when the person who "knows the spreadsheet" is on leave?</td><td class="text-xs text-tertiary">How fragile is the current system</td></tr>
+            <tr><td class="text-tertiary text-xs">6</td><td class="text-sm">Have you tried solving this before? What happened?</td><td class="text-xs text-tertiary">Why past attempts failed = your differentiation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stack stack-6">
+      <h2>Outreach Sequence</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Day</th><th>Action</th><th>Channel</th><th>Goal</th></tr></thead>
+          <tbody>
+            <tr><td class="text-sm text-semibold">Day 0</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-neutral"></span>IIT alumni search at target company</div></td><td class="text-xs text-secondary">LinkedIn</td><td class="text-xs text-tertiary">Find warm path</td></tr>
+            <tr><td class="text-sm text-semibold">Day 0</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-neutral"></span>LinkedIn connection request (personalized)</div></td><td class="text-xs text-secondary">LinkedIn</td><td class="text-xs text-tertiary">Get in the door</td></tr>
+            <tr><td class="text-sm text-semibold">Day 1–2</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-info"></span>LinkedIn DM after accepting</div></td><td class="text-xs text-secondary">LinkedIn DM</td><td class="text-xs text-tertiary">Book a call</td></tr>
+            <tr><td class="text-sm text-semibold">Day 1–2</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-info"></span>Cold email (same day as DM)</div></td><td class="text-xs text-secondary">Email</td><td class="text-xs text-tertiary">Parallel touchpoint</td></tr>
+            <tr><td class="text-sm text-semibold">Day 3</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-success"></span>Cold call if no response</div></td><td class="text-xs text-secondary">Phone</td><td class="text-xs text-tertiary">Direct conversation</td></tr>
+            <tr><td class="text-sm text-semibold">Day 4–5</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-success"></span>WhatsApp if warm intro gave number</div></td><td class="text-xs text-secondary">WhatsApp</td><td class="text-xs text-tertiary">Casual + fast</td></tr>
+            <tr><td class="text-sm text-semibold">Day 7</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-success"></span>Final short follow-up email</div></td><td class="text-xs text-secondary">Email</td><td class="text-xs text-tertiary">Close or move on</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /tab-outreach -->
+
+  <!-- ═══════════════════ SETUP TAB ═══════════════════ -->
+  <div class="tab-pane" id="tab-setup">
+
+    <div class="grid-3">
+      <div class="stat"><div class="stat-value">₹10–15K</div><div class="stat-label">Pvt Ltd registration cost</div></div>
+      <div class="stat"><div class="stat-value">10–15 days</div><div class="stat-label">Company registration time</div></div>
+      <div class="stat"><div class="stat-value">1 day</div><div class="stat-label">Time to ship your website</div></div>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">Register Pvt Ltd, not LLP</div>
+      Clients write cheques to Pvt Ltd without hesitation. LLP signals smaller operation. Get a CA to file SPICe+ on MCA — done in 10 days. Open a current account at HDFC immediately after. Get GST registration early even before you hit ₹20L — clients expect a GSTIN.
+    </div>
+
+    <div class="grid-2">
+      <div class="stack stack-8">
+        <h2>Week 1 Action Plan</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Day</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td class="text-sm text-semibold">Mon</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-neutral"></span>Start company reg with CA · buy domain · update LinkedIn headline</div></td></tr>
+              <tr><td class="text-sm text-semibold">Tue–Wed</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-neutral"></span>Ship website (Next.js + Vercel, 1 day) · write anonymized BCG case study</div></td></tr>
+              <tr><td class="text-sm text-semibold">Thu</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-info"></span>Build lead list: 50 companies, 3 industries (Zaubacorp + LinkedIn + IndiaMart)</div></td></tr>
+              <tr><td class="text-sm text-semibold">Fri</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-info"></span>IIT alumni sweep on all 50 targets · set up CRM in Notion</div></td></tr>
+              <tr><td class="text-sm text-semibold">Week 2</td><td class="text-sm"><div class="td-lead"><span class="row-dot dot-success"></span>20 LinkedIn requests + 15 cold emails · attend 1 BLR event (TiE/CII)</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="stack stack-8">
+        <h2>Tools Stack</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tool</th><th>Use</th><th>Cost</th></tr></thead>
+            <tbody>
+              <tr><td class="text-sm text-semibold">LinkedIn Sales Nav</td><td class="text-xs text-secondary">Lead prospecting</td><td class="text-xs">₹3,500/mo</td></tr>
+              <tr><td class="text-sm text-semibold">Apollo.io</td><td class="text-xs text-secondary">Email + phone finder</td><td class="text-xs">Free → $49/mo</td></tr>
+              <tr><td class="text-sm text-semibold">Google Workspace</td><td class="text-xs text-secondary">Email + Docs</td><td class="text-xs">₹150/user/mo</td></tr>
+              <tr><td class="text-sm text-semibold">Notion</td><td class="text-xs text-secondary">CRM (early stage)</td><td class="text-xs">Free</td></tr>
+              <tr><td class="text-sm text-semibold">Razorpay</td><td class="text-xs text-secondary">Collect payments</td><td class="text-xs">1.8% per txn</td></tr>
+              <tr><td class="text-sm text-semibold">Cal.com</td><td class="text-xs text-secondary">Booking links</td><td class="text-xs">Free</td></tr>
+              <tr><td class="text-sm text-semibold">Loom</td><td class="text-xs text-secondary">Async video demos</td><td class="text-xs">Free</td></tr>
+              <tr><td class="text-sm text-semibold">Vercel + Next.js</td><td class="text-xs text-secondary">Website</td><td class="text-xs">Free</td></tr>
+              <tr><td class="text-sm text-semibold">Zaubacorp</td><td class="text-xs text-secondary">India company database</td><td class="text-xs">Free</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack stack-8">
+      <h2>Portfolio Before First Client</h2>
+      <p class="text-secondary text-sm">You have zero client work. These 3 assets bridge the credibility gap.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header">BCG Case Study <span class="pill pill-sm accent" style="font-size:.65rem">Do first</span></div>
+          <div class="card-body">Anonymize your GPT-powered Excel automation from BCG. <strong>"Reduced report generation from 8 hrs to 45 mins for a ₹1,300 Cr battery OEM."</strong> Real, credible, directly relevant. This is your strongest asset.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Demo Project</div>
+          <div class="card-body">Pick one industry. Build a fake company's before/after — show the Excel chaos, then the clean dashboard. 15 mins of build = a 5-minute demo that converts cold leads to warm conversations.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Friend's Startup Cases</div>
+          <div class="card-body">2–3 anonymized data points from your co-founder's startup transforms your pitch from "two guys" to "proven team." Even screenshots with company names blurred work.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack stack-8">
+      <h2>Revenue Milestones</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Timeline</th><th>Clients</th><th>MRR</th><th>Project Cash</th></tr></thead>
+          <tbody>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-neutral"></span>Month 1</div></td><td class="text-sm">Building, outreach</td><td class="text-sm">₹0</td><td class="text-xs text-tertiary">—</td></tr>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-neutral"></span>Month 2</div></td><td class="text-sm">1 pilot</td><td class="text-sm text-semibold">₹20K</td><td class="text-xs text-secondary">₹2L upfront</td></tr>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-info"></span>Month 3</div></td><td class="text-sm">2 clients</td><td class="text-sm text-semibold">₹60K</td><td class="text-xs text-secondary">+₹4L upfront</td></tr>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-info"></span>Month 6</div></td><td class="text-sm">5 clients</td><td class="text-sm text-semibold">₹2.5L</td><td class="text-xs text-secondary">Consistent</td></tr>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-success"></span>Month 9</div></td><td class="text-sm">8 clients</td><td class="text-sm text-semibold">₹4–5L</td><td class="text-xs text-secondary">Profitable</td></tr>
+            <tr><td class="text-sm text-semibold"><div class="td-lead"><span class="row-dot dot-success"></span>Month 12</div></td><td class="text-sm">10–12 clients</td><td class="text-sm text-semibold">₹6–8L</td><td class="text-xs text-secondary">Hiring signal</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-success">
+        <div class="callout-title">MRR is the goal, not project revenue</div>
+        One-time projects are great for cash flow. But 10 clients at ₹50K/month = ₹5L MRR. That's what makes this a business. Every project you ship must have a monthly maintenance tail.
+      </div>
+    </div>
+
+    <div class="stack stack-8">
+      <h2>Lead Sources — How to Find Companies</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Source</th><th>Best For</th><th>Cost</th><th>How to Use</th></tr></thead>
+          <tbody>
+            <tr><td class="text-sm text-semibold">LinkedIn Sales Navigator</td><td class="text-xs text-secondary">All industries</td><td class="text-xs">₹3,500/mo</td><td class="text-xs text-secondary">Filter: BLR, 50–500 employees, industry</td></tr>
+            <tr><td class="text-sm text-semibold">Zaubacorp.com</td><td class="text-xs text-secondary">Manufacturing, Real Estate</td><td class="text-xs">Free</td><td class="text-xs text-secondary">Search by state + industry + revenue range</td></tr>
+            <tr><td class="text-sm text-semibold">IndiaMart</td><td class="text-xs text-secondary">Manufacturing, Distribution</td><td class="text-xs">Free</td><td class="text-xs text-secondary">Search by product + Bangalore</td></tr>
+            <tr><td class="text-sm text-semibold">Apollo.io</td><td class="text-xs text-secondary">Email + phone</td><td class="text-xs">Free (150/mo)</td><td class="text-xs text-secondary">Chrome ext on LinkedIn → get email in 1 click</td></tr>
+            <tr><td class="text-sm text-semibold">MCA21 (mca.gov.in)</td><td class="text-xs text-secondary">Any registered company</td><td class="text-xs">Free</td><td class="text-xs text-secondary">Filter by NIC code + Karnataka + paid-up capital</td></tr>
+            <tr><td class="text-sm text-semibold">TiE / CII / CREDAI events</td><td class="text-xs text-secondary">Real Estate, Mfg, General</td><td class="text-xs">₹500–2K entry</td><td class="text-xs text-secondary">Attend monthly. Best for warm intros.</td></tr>
+            <tr><td class="text-sm text-semibold">BNI Bangalore</td><td class="text-xs text-secondary">Mid-size B2B owners</td><td class="text-xs">Membership</td><td class="text-xs text-secondary">Join Koramangala/Indiranagar chapter. Referral network.</td></tr>
+            <tr><td class="text-sm text-semibold">IIT Kanpur Alumni (LinkedIn)</td><td class="text-xs text-secondary">Any company</td><td class="text-xs">Free</td><td class="text-xs text-secondary">Filter alumni by company name → instant warm intro</td></tr>
+            <tr><td class="text-sm text-semibold">CA/CS referral network</td><td class="text-xs text-secondary">All industries</td><td class="text-xs">Referral fee</td><td class="text-xs text-secondary">Offer ₹25–50K per closed client. They talk to owners monthly.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /tab-setup -->
+
+</div><!-- /page -->
+
+<script>
+  // ── Tab switching ──────────────────────────────────────────────
+  function switchTab(name) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelectorAll('#tabNav .pill').forEach((btn, i) => {
+      const names = ['industries','workflows','outreach','setup'];
+      btn.classList.toggle('active', names[i] === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Score bars ─────────────────────────────────────────────────
+  document.querySelectorAll('.score-bar[data-score]').forEach(el => {
+    const score = parseInt(el.dataset.score);
+    const filled = Math.round(score / 10);
+    let html = '';
+    for (let i = 0; i < 10; i++) {
+      html += `<div class="score-pip${i < filled ? ' filled' : ''}"></div>`;
+    }
+    html += `<span class="score-label">${score}</span>`;
+    el.innerHTML = html;
+  });
+
+  // ── Industry detail ────────────────────────────────────────────
+  function showIndustry(id) {
+    const cards = document.querySelectorAll('.detail-card');
+    const pills = document.querySelectorAll('#industryPills .pill');
+    const target = document.getElementById('detail-' + id);
+    const alreadyOpen = target && target.classList.contains('visible');
+
+    cards.forEach(c => c.classList.remove('visible'));
+    pills.forEach(p => p.classList.remove('active'));
+
+    if (!alreadyOpen && target) {
+      target.classList.add('visible');
+      const pill = [...pills].find(p => p.getAttribute('onclick').includes("'" + id + "'"));
+      if (pill) pill.classList.add('active');
+    }
+  }
+
+  // ── Accordion ─────────────────────────────────────────────────
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // ── Workflow filter ────────────────────────────────────────────
+  function filterWf(velocity, btn) {
+    document.querySelectorAll('#wfFilter .filter-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.wf-row').forEach(row => {
+      if (velocity === 'all') {
+        row.classList.remove('hidden');
+      } else {
+        row.classList.toggle('hidden', row.dataset.velocity !== velocity);
+      }
+    });
+  }
+</script>
+</body>
+</html>
